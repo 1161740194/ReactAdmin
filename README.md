@@ -1,68 +1,154 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# day01
+## 1、项目开发准备
+### 1）. 描述项目
+### 2）. 技术选型
+### 3）. API接口文档/接口文档/测试接口
 
-## Available Scripts
+## 2、启动项目开发
+### 1）. 使用react脚手架创建项目
+```
+create-react-app project-name
+```
+### 2）. 开发环境运行
+```
+npm start
 
-In the project directory, you can run:
+```
+### 3）. 生产环境打包运行
+```
+ npm run build
+ serve build
+```
 
-### `npm start`
+## 3、git管理项目
+### 1）. 创建远程仓库
+### 2）. 创建本地仓库
+```
+    a. 配置.gitignore
+    b. git init
+    c. git add .
+    d. git commit -m "init"
+```
+### 3）. 将本地仓库推送到远程仓库
+```
+git remote add origin url
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+git push origin master
+```
+### 4）. 在本地创建dev分支，并推送到git
+```
+git checkout -b dev
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+git push origin dev
+```
+### 5）. 如果本地有修改
+```
+git add .
 
-### `npm test`
+git commit -m "xxx"
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git push origin dev
+```
+### 6）. 克隆仓库
+```
+git clone url
 
-### `npm run build`
+git checkout -b dev origin/dev
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+git pull origin dev
+```
+### 7）. 如果远程修改
+```
+git pull origin dev
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 4. 创建项目的基本结构
+api: ajax请求的模块
+commponents: 非路由组件
+pages: 路由组件
+App.js: 应用的根组件
+index.js: 入门js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 5. 引入antd
 
-### `npm run eject`
+下载antd的包，按需打包：只打包impot引入的js/css
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 下载包工具
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### config-overrides.js
+```
+const {
+    override,
+    fixBabelImports,
+    addLessLoader
+} = require('customize-cra');
+module.exports = override(
+    fixBabelImports('import', {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+    }),
+    addLessLoader({
+        lessOptions: {
+            javascriptEnabled: true,
+            modifyVars: {
+                '@primary-color': '#1DA57A'
+            },
+        },
+    })
+);
+```
+### package.json
+```
+"scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 自定义主题
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+config-overrides.js
 
-## Learn More
+### 使用antd组件
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+根据antd的文档编写
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 6. 引入路由
+### 下载包
+```
+react-router-dom
+```
+### 拆分应用路由
+Login: 登陆
+Admin: 后台管理界面
 
-### Code Splitting
+### 注册路由
+```
+ BrowserRouter /  Router, 
+ <Router>
+    <Switch>
+        <Route>
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## 7. Login静态组件
+自定义一部分样式
+使用antd的组件实现表单页面
+Form / Form.Item
+Input
+Icon
+Button
 
-### Advanced Configuration
+## 8. 收集数据和表单的前台验证 
+使用antd内置方法rules进行格式验证
+使用antd内置方法onFinish验证通过并提交表单对象
+使用antd内置方法onFinishFailed验证失败返回结果
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# day02
